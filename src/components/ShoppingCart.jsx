@@ -89,13 +89,35 @@ function CartItem({ item, setCartItems, cartItems }) {
     setCartItems((prev) => prev.filter((prevItem) => prevItem.id !== item.id));
   }
 
+  function handleQuantityChange(e) {
+    const newQuantity = parseInt(e.target.value);
+    setCartItems((prev) =>
+      prev.map((prevItem) =>
+        prevItem.id === item.id
+          ? { ...prevItem, quantity: newQuantity }
+          : prevItem
+      )
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center border-2 p-4">
         <h3 className="text-lg font-medium text-gray-900">{item.title}</h3>
+        <select
+          value={item.quantity}
+          onChange={handleQuantityChange}
+          className="border rounded-md p-1"
+        >
+          {[1, 2, 3, 4, 5].map((num) => (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          ))}
+        </select>
         <div className="flex flex-col gap-2">
           <p className="text-gray-500">
-            Price: ${String(item.price) * item.quantity}
+            Price: ${(item.price * item.quantity).toFixed(2)}
           </p>
           <p className="text-gray-500">Quantity: {item.quantity}</p>
           <button onClick={handleRemoveFromCart} className="text-red-400">

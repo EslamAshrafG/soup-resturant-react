@@ -467,14 +467,11 @@ function MenuItem({
   selectedItemId,
   setSelectedItemId,
 }) {
-  const [quantity, setQuantity] = useState(1);
-
   const item = {
     id,
     img,
     price,
     title,
-    quantity,
   };
 
   function handleAddToCart() {
@@ -486,7 +483,7 @@ function MenuItem({
         )
       );
     } else {
-      setCartItems((prev) => [...prev, { ...item }]);
+      setCartItems((prev) => [...prev, { ...item, quantity: 1 }]);
     }
   }
 
