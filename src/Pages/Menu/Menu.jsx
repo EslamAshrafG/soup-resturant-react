@@ -477,8 +477,6 @@ function MenuItem({
     quantity,
   };
 
-
-
   function handleAddToCart() {
     const itemInCart = cartItems.find((item) => item.id === id);
     if (itemInCart) {
@@ -532,32 +530,29 @@ function SelectedItem({ selectedItemId, items, setSelectedItemId }) {
   const selectedItem = items.find((item) => item.id === selectedItemId);
   return (
     <>
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 p-6 -translate-y-1/2 w-[90%] h-[90%] lg:max-w-[800px] lg:max-h-[600px]  flex flex-col items-center justify-center z-[10000] bg-white rounded-lg">
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[95%] max-w-4xl max-h-[800px] flex flex-col md:flex-row items-center justify-center z-[10000] bg-white rounded-lg overflow-hidden shadow-xl">
         <div
           style={{
-            aspectRatio: "1/1",
             background: `url("${selectedItem.img}")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="h-full w-full"
-        >
-          {/* <img
-            src={selectedItem.img}
-            alt={selectedItem.title}
-            className="w-full h-full object-cover"
-          /> */}
-        </div>
-        <div className="flex flex-col items-center justify-center w-full h-full relative bg-gray-100 p-6 md:text-center">
-          <h2 className="text-3xl font-bold mb-4">{selectedItem.title}</h2>
-          <p className="text-xl mb-2">Price: ${selectedItem.price}</p>
-          <p className="text-gray-600 mb-4 text-left md:text-center">
-            {selectedItem.description ||
-              "A delicious menu item perfect for any occasion. Made with fresh, locally-sourced ingredients and prepared to perfection by our expert chefs. This dish combines bold flavors and exquisite textures to create a memorable dining experience. "}
+          className="w-full md:w-1/2 h-1/3 md:h-full"
+        />
+        <div className="flex flex-col w-full md:w-1/2 h-2/3 md:h-full bg-gray-100 p-4 md:p-8 overflow-y-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">
+            {selectedItem.title}
+          </h2>
+          <p className="text-lg md:text-xl mb-2">
+            Price: ${selectedItem.price}
           </p>
-          <div className=" w-full">
-            <h3 className="text-xl font-bold mb-2">Ingredients :</h3>
-            <ul className="list-disc list-inside text-left">
+          <p className="text-sm md:text-base text-gray-600 mb-4">
+            {selectedItem.description ||
+              "A delicious menu item perfect for any occasion. Made with fresh, locally-sourced ingredients and prepared to perfection by our expert chefs. This dish combines bold flavors and exquisite textures to create a memorable dining experience."}
+          </p>
+          <div className="w-full">
+            <h3 className="text-lg md:text-xl font-bold mb-2">Ingredients:</h3>
+            <ul className="list-disc list-inside text-sm md:text-base">
               <li>Fresh vegetables (tomatoes, lettuce, onions)</li>
               <li>High-quality protein (chicken, beef, or tofu)</li>
               <li>Aromatic herbs and spices</li>
@@ -566,19 +561,15 @@ function SelectedItem({ selectedItemId, items, setSelectedItemId }) {
             </ul>
           </div>
         </div>
-        <span
-          className="text-4xl cursor-pointer absolute -top-8 -right-4 z-[2000] bg-white rounded-full aspect-square p-1 flex items-center justify-center text-gray-700 hover:text-gray-700"
+        <button
+          className="absolute top-2 right-2 text-3xl cursor-pointer bg-white rounded-full p-1 text-gray-700 hover:text-gray-900 transition-colors"
           onClick={() => setSelectedItemId(null)}
+          aria-label="Close"
         >
-          <svg
-            viewBox="0 0 1024 1024"
-            fill="currentColor"
-            height="1.5em"
-            width="1.5em"
-          >
-            <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z" />
+          <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
           </svg>
-        </span>
+        </button>
       </div>
       <Overlay />
     </>

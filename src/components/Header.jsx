@@ -95,6 +95,7 @@ function LogoLarge({ navigate }) {
 }
 
 function NavLinks({ isOpen, setIsOpen, width }) {
+  const navigate = useNavigate();
   function handleClick() {
     scrollIntoView();
     if (width <= 1024) setIsOpen(false);
@@ -112,7 +113,10 @@ function NavLinks({ isOpen, setIsOpen, width }) {
       ))}
       <Button
         className="px-6 py-[6px] text-white transition-all"
-        onClick={handleClick}
+        onClick={() => {
+          navigate("/Menu");
+          scrollIntoView();
+        }}
       >
         Order
       </Button>
